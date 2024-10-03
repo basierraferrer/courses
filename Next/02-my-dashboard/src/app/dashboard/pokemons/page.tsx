@@ -1,4 +1,4 @@
-import { PokemonsResponse, SimplePokemon, PokemonGrid } from "@/pokemons";
+import { PokemonsResponse, SimplePokemon, PokemonGrid } from "@/modules/pokemons";
 
 
 const getPokemons = async (limit = 20, offset = 0): Promise<SimplePokemon[]> => {
@@ -19,7 +19,7 @@ export default async function PokemonsPage() {
     const pokemons = await getPokemons(151);
     return (
         <div className="p-2 flex flex-col">
-            <span className="text-5xl my-2">Listado de Pokemóns <small>estático</small></span>
+            <span className="text-5xl my-2">Listado de Pokemóns <small className="text-blue-500">estático</small></span>
 
             <PokemonGrid pokemons={pokemons} />
 

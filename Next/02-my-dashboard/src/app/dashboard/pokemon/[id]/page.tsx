@@ -1,4 +1,4 @@
-import { Pokemon } from "@/pokemons";
+import { Pokemon } from "@/modules/pokemons";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";

@@ -1,22 +1,38 @@
 'use client';
 
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { addOne, initState, subtractOne } from "@/store/counter/counterSlice";
+import { useEffect } from "react";
 
 interface ICartCounterProps {
     value?: number
 }
 
+interface ICounterResponse {
+    count: number;
+}
+
+const getApiCounter = async (): Promise<ICounterResponse> => {
+    const data = await fetch('/api/counter').then(res => res.json())
+    console.log("**__** ~ getApiCounter ~ data:", data)
+    return data;
+}
+
 export const CartCounter = ({ value = 0 }: ICartCounterProps) => {
-    const [counter, setCounter] = useState(value);
+    const counter = useAppSelector(state => state.counter.count);
+    const dispatch = useAppDispatch();
 
     const increment = () => {
-        setCounter(counter + 1);
+        dispatch(addOne());
     }
     const decrement = () => {
-        if (counter > 0) {
-            setCounter(counter - 1);
-        }
+        dispatch(subtractOne());
     }
+
+    useEffect(() => {
+        getApiCounter().then(data => dispatch(initState(data.count)))
+    }, [dispatch, value])
+
     return (
         <div className="flex flex-col items-center justify-center">
             <span className="text-9xl">{counter}</span>

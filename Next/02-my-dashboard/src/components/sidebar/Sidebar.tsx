@@ -1,25 +1,32 @@
 import Image from 'next/image'
-import { IoBrowsersOutline, IoCalculator, IoFootball, IoLogoReact } from 'react-icons/io5';
-import { SidebarMenuItem } from './SidebarMenuItem';
+import { IoBrowsersOutline, IoCalculator, IoFootball, IoHeartCircle, IoLogoReact } from 'react-icons/io5';
+import { SidebarMenuItem } from '@/components';
+import { DASHBOARD_ROUTES } from '@/utils';
 
 const menuItems = [
     {
-        path: '/dashboard/main',
+        path: DASHBOARD_ROUTES.MAIN,
         icon: <IoBrowsersOutline className='text-white' size={40} />,
         title: 'Dashboard',
         subtitle: 'Data view',
     },
     {
-        path: '/dashboard/counter',
+        path: DASHBOARD_ROUTES.COUNTER,
         icon: <IoCalculator className='text-white' size={40} />,
         title: 'Counter',
         subtitle: 'Counter Client Side',
     },
     {
-        path: '/dashboard/pokemons',
+        path: DASHBOARD_ROUTES.POKEMONS,
         icon: <IoFootball className='text-white' size={40} />,
         title: 'Pokemons',
-        subtitle: 'Static render',
+        subtitle: 'Static Render',
+    },
+    {
+        path: DASHBOARD_ROUTES.FAVORITES,
+        icon: <IoHeartCircle className='text-white' size={40} />,
+        title: 'Favorites',
+        subtitle: 'Global State',
     },
 
 ]
