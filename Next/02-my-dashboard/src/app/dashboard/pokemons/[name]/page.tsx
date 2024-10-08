@@ -1,62 +1,76 @@
-import { Pokemon, PokemonsResponse } from "@/modules/pokemons";
+import { Pokemon, PokemonsResponse } from "@/pokemons";
 import { Metadata } from "next";
-import Image from "next/image";
+import Image from 'next/image';
 import { notFound } from "next/navigation";
 
-interface IParamProps {
-    params: {
-        name: string;
-    }
+
+interface Props {
+    params: { name: string };
 }
 
-/**
- * Se usa para generar contenido estático en build time
- * @returns Array de params [{id:'value}] 
- */
+//! En build time
 export async function generateStaticParams() {
+
     const data: PokemonsResponse = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=151`)
         .then(res => res.json());
 
-    const static151Pokes = data.results.map(pokemon => ({
+    const static151Pokemons = data.results.map(pokemon => ({
         name: pokemon.name,
     }));
 
-    return static151Pokes;
+    return static151Pokemons.map(({ name }) => ({
+        name: name
+    }));
+
 }
 
-export async function generateMetadata({ params }: IParamProps): Promise<Metadata> {
+
+
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+
     try {
         const { id, name } = await getPokemon(params.name);
 
         return {
             title: `#${id} - ${name}`,
-            description: `Página del Pokemon ${name}`
+            description: `Página del pokémon ${name}`
         }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     } catch (error) {
         return {
-            title: 'Pokemon detail',
-            description: 'Página del Pokemon'
+            title: 'Página del pokémon',
+            description: 'Culpa cupidatat ipsum magna reprehenderit ex tempor sint ad minim reprehenderit consequat sit.'
         }
     }
 }
 
+
 const getPokemon = async (name: string): Promise<Pokemon> => {
+
+
     try {
-        const data: Pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
-            cache: 'force-cache'
-        }).then(res => res.json());
+        const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
+            // cache: 'force-cache',// TODO: cambiar esto en un futuro
+            next: {
+                revalidate: 60 * 60 * 30 * 6
+            }
+        }).then(resp => resp.json());
 
+        console.log('Se cargó: ', pokemon.name);
 
-        return data;
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        return pokemon;
+
     } catch (error) {
         notFound();
     }
+
 }
 
 
-export default async function PokemonPage({ params }: IParamProps) {
+
+
+export default async function PokemonPage({ params }: Props) {
 
     const pokemon = await getPokemon(params.name);
 

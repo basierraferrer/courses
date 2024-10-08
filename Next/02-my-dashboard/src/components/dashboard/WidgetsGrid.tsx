@@ -1,31 +1,25 @@
 'use client';
 
-import React from 'react'
-import { IoCafeOutline, IoAirplaneSharp } from 'react-icons/io5'
-import { useAppSelector } from '@/store'
-import { SimpleWidget } from '@/components'
-import { DASHBOARD_ROUTES } from '@/utils';
+
+import { IoCartOutline } from "react-icons/io5"
+import { SimpleWidget } from "./SimpleWidget"
+import { useAppSelector } from "@/store"
+
 
 export const WidgetsGrid = () => {
-    const counter = useAppSelector(state => state.counter.count);
-    return (
-        <div className="flex flex-wrap justify-center">
-            <SimpleWidget
-                label='Contador'
-                icon={<IoCafeOutline className='text-blue-400' size={50} />}
-                href={DASHBOARD_ROUTES.COUNTER}
-                title={counter.toString()}
-                subtitle='Productos seleccionados'
-            />
 
-            <SimpleWidget
-                label='Contador'
-                icon={<IoAirplaneSharp className='text-blue-400' size={50} />}
-                href={DASHBOARD_ROUTES.COUNTER}
-                title={counter.toString()}
-                subtitle='Productos seleccionados'
-            />
+  const isCart = useAppSelector( state => state.counter.count );
 
-        </div>
-    )
+  return (
+    <div className="flex flex-wrap p-2 items-center justify-center">
+        <SimpleWidget 
+          title={ `${isCart}` }
+          subTitle="Productos agregados"
+          label="Contador"
+          icon={ <IoCartOutline size={ 70 } className="text-blue-600" /> }
+          href="/dashboard/counter"
+        />
+        {/* <SimpleWidget /> */}
+    </div>
+  )
 }
