@@ -18,8 +18,22 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Data base
 
-Then, we need to execute the data base
+1. we need to execute the data base ```docker compose up -d```
+2. Rename `.env.template` file to `.env`
+3. Change environments variables.
+4. Execute SEED to have data [create local database](http://localhost:3000/api/seed)
 
-```
-docker compose up -d
-```
+### Prisma commands
+
+to initialize
+
+```npx prisma init```
+
+to sync database with schema
+
+```npx prisma migrate dev```
+
+to generate Client
+
+```npx prisma generate```
+
