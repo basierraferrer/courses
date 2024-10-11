@@ -1,10 +1,10 @@
-import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server'
-import yup from 'yup';
+import * as yup from 'yup';
+import prisma from '@/lib/prisma';
 
 /**
  * 
- * take:2
+ * 
  * 
  * @param request 
  * @returns 
@@ -51,6 +51,22 @@ export async function POST(request: Request) {
             data: {
                 complete, 
                 description
+            }
+        });
+
+        return NextResponse.json(todo);
+    }catch(error){
+        return NextResponse.json(error, {status: 400});
+    }
+}
+
+export async function DELETE(request: Request) {
+
+    try {       
+    
+        const todo = await prisma.todo.deleteMany({
+            where:{
+                complete: true
             }
         });
 

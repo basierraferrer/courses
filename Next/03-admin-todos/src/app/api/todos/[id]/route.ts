@@ -1,6 +1,6 @@
-import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server'
-import yup from 'yup';
+import * as yup from 'yup';
+import prisma from '@/lib/prisma';
 
 interface ISegmentsProps {
     params: {
@@ -34,6 +34,7 @@ const putSchema = yup.object({
 
 export async function PUT(request: Request, segments: ISegmentsProps) { 
     const {id} = segments.params;    
+    
     const todo = await prisma.todo.findFirst({
         where:{
             id,
