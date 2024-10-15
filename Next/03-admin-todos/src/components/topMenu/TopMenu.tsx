@@ -1,8 +1,23 @@
+import { cookies } from 'next/headers'
+import Link from 'next/link'
 import React from 'react'
+import { CiShoppingBasket } from 'react-icons/ci'
 import { IoMdMenu } from 'react-icons/io'
-import { IoBarChart, IoBed, IoSearch, IoSearchCircleOutline } from 'react-icons/io5'
+import { IoBarChart, IoSearch, IoSearchCircleOutline } from 'react-icons/io5'
 
 export const TopMenu = () => {
+
+    const cookieStore = cookies();
+    const cart = JSON.parse(cookieStore.get('cart')?.value ?? '{}');
+
+    const getTotalCount = () => {
+        let items = 0;
+        Object.values(cart).forEach(value => {
+            items += value as number;
+        });
+        return items
+    }
+
     return (
         <div className="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
 
@@ -28,9 +43,10 @@ export const TopMenu = () => {
                     <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
                         <IoBarChart size={25} />
                     </button>
-                    <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-                        <IoBed size={25} />
-                    </button>
+                    <Link href='/dashboard/cart' className="p-2 flex items-center justify-center  h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
+                        {getTotalCount() > 0 && <span className='text-sm mr-1 font-bold text-red-500'>{getTotalCount()}</span>}
+                        <CiShoppingBasket size={25} />
+                    </Link>
                 </div>
             </div>
         </div>

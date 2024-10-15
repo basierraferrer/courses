@@ -1,9 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IoCheckmark, IoCheckmarkDone, IoHome, IoHomeOutline, IoList, IoListOutline, IoLogOut } from 'react-icons/io5';
+import { IoCheckmark, IoCheckmarkDone, IoHome, IoHomeOutline, IoList, IoListOutline, IoLogOut, IoStorefront, IoStorefrontOutline } from 'react-icons/io5';
 
 import { SidebarItems } from './SidebarItems';
+import { MdCookie, MdOutlineCookie } from 'react-icons/md';
 
 const menuItems = [
     {
@@ -23,7 +24,19 @@ const menuItems = [
         iconActive: <IoList size={30} />,
         title: 'Server Actions',
         path: '/dashboard/server-todos',
-    }
+    },
+    {
+        icon: <MdOutlineCookie size={30} />,
+        iconActive: <MdCookie size={30} />,
+        title: 'Cookies',
+        path: '/dashboard/cookies',
+    },
+    {
+        icon: <IoStorefrontOutline size={30} />,
+        iconActive: <IoStorefront size={30} />,
+        title: 'Products',
+        path: '/dashboard/products',
+    },
 ]
 
 export const Sidebar = () => {
