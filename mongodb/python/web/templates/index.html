@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ACADEMIA APASOFT TRAINING</title>
+    <style>
+        .alumnos {
+            padding: 10px;
+            margin: 10px;
+            background-color: #9ac5f0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            /* Espacio entre elementos, ajústalo según necesites */
+        }
+
+
+        .item {
+            background-color: #e0e0e0;
+            padding: 20px;
+            text-align: center;
+            /* Otros estilos */
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="alumnos">Apasoft Training. Gestión de alumnos</h1>
+    <hr>
+    <div class="content">
+        <form method="post">
+            <p>
+                <b><label for="content">Nombre</label></b>
+            </p>
+            <p>
+                <input type="text" name="nombre" placeholder="Nombre:"></input>
+            </p>
+            <p>
+                <b><label for="content">Apellidos</label></b>
+            </p>
+            <p>
+                <input type="text" name="apellidos" placeholder="Apellidos:"></input>
+            </p>
+
+            <p>
+                <b><label for="content">Edad</label></b>
+            </p>
+            <p>
+                <input type="text" name="edad" placeholder="Edad:"></input>
+            </p>
+
+            <p>
+                <b><label for="degree">Sexo</label></b>
+            </p>
+            <p>
+                <input id="sexo-0" name="sexo" required type="radio" value="Hombre">
+                <label for="sexo-0">Hombre</label>
+            </p>
+            <p>
+                <input id="sexo-1" name="sexo" required type="radio" value="Mujer">
+                <label for="sexo-1">Mujer</label>
+            </p>
+            <button type="submit">Guardar</button>
+        </form>
+        <hr>
+        <div class="grid-container">
+            {% for alumno in alumnos %}
+            <div class="item">
+                <p>Nombre: {{ alumno['nombre'] }} {{ alumno['apellidos']}}</p>
+                <p>Edad: {{ alumno['edad'] }} Sexo: {{ alumno['sexo']}}</i></p>
+                <form method="POST" action="{{url_for('delete',id=alumno['_id'])}}">
+                    <input type="submit" value="Borrar Alumno" onclick="return confirm('¿Quieres borrar el alumno?')">
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+</body>
+
+</html>
