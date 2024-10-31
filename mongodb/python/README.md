@@ -36,7 +36,7 @@ PSSW_DB = [password]
 Ya teniendo listo los modulos podemos empezar a relaizar pruebas con cada archivo `.py` del folder scripts 
 
 ```bash
-python3 local_conection.py
+python3 scripts/local_conection.py
 ```
 ## web
 El folder web es un pequeño ejemplo de implelemntación web con python y pymongo para ejecutarlo debes instalar los moudles anteriormente mencionados
