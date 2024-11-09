@@ -50,6 +50,12 @@ const menuItems = [
     title: "Products",
     path: "/dashboard/products",
   },
+  {
+    icon: <IoPersonOutline size={30} />,
+    iconActive: <IoPerson size={30} />,
+    title: "Profile",
+    path: "/dashboard/profile",
+  },
 ];
 
 export const Sidebar = async () => {
