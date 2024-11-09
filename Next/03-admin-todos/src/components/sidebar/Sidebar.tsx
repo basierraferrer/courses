@@ -1,10 +1,23 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IoCheckmark, IoCheckmarkDone, IoHome, IoHomeOutline, IoList, IoListOutline, IoLogOut, IoStorefront, IoStorefrontOutline } from 'react-icons/io5';
+import { 
+    IoCheckmark, 
+    IoCheckmarkDone, 
+    IoHome, 
+    IoHomeOutline, 
+    IoList, 
+    IoListOutline, 
+    IoLogOut, 
+    IoStorefront, 
+    IoStorefrontOutline, 
+    IoPersonOutline, 
+    IoPerson,
+} from 'react-icons/io5';
 
 import { SidebarItems } from './SidebarItems';
 import { MdCookie, MdOutlineCookie } from 'react-icons/md';
+import { auth } from '@/auth';
 
 const menuItems = [
     {
@@ -37,9 +50,16 @@ const menuItems = [
         title: 'Products',
         path: '/dashboard/products',
     },
+    {
+        icon: <IoPersonOutline size={30} />,
+        iconActive: <IoPerson size={30} />,
+        title: 'Profile',
+        path: '/dashboard/profile',
+    },
 ]
 
-export const Sidebar = () => {
+export const Sidebar = async () => {
+    const session = await auth();
     return (
         <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
             <div>
@@ -56,13 +76,13 @@ export const Sidebar = () => {
 
                 <div className="mt-8 text-center">
                     <Image
-                        src="https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"
+                        src={session?.user?.image ?? "https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"}
                         alt="Profile photo"
                         width={120}
                         height={120}
                         className="m-auto rounded-full object-cover"
                     />
-                    <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">Cynthia J. Watts</h5>
+                    <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{session?.user?.name ?? 'No Name'}</h5>
                     <span className="hidden text-gray-400 lg:block">Admin</span>
                 </div>
 
