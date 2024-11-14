@@ -18,6 +18,7 @@ import { SidebarItems } from "./SidebarItems";
 import { MdCookie, MdOutlineCookie } from "react-icons/md";
 import { auth } from "@/auth";
 import { SignOutButton } from "./SignOutButton";
+import { redirect } from "next/navigation";
 
 const menuItems = [
   {
@@ -60,6 +61,9 @@ const menuItems = [
 
 export const Sidebar = async () => {
   const session = await auth();
+
+  if (!session) redirect("/api/auth/signin");
+
   return (
     <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
       <div>
