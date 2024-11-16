@@ -1,77 +1,108 @@
-import { NextResponse } from 'next/server'
-import * as yup from 'yup';
-import prisma from '@/lib/prisma';
+import { NextResponse } from "next/server";
+import * as yup from "yup";
+import prisma from "@/lib/prisma";
+import { getUserServerSession } from "@/auth/actions/auth-actions";
 
 /**
- * 
- * 
- * 
- * @param request 
- * @returns 
+ *
+ *
+ *
+ * @param request
+ * @returns
  */
 
-export async function GET(request: Request) { 
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const take = Number(searchParams.get("take")) ?? 10;
+  const skip = Number(searchParams.get("skip")) ?? 0;
 
-    const {searchParams } = new URL(request.url);
-    const take = Number(searchParams.get('take')) ?? 10;
-    const skip = Number(searchParams.get('skip')) ?? 0;
+  const user = await getUserServerSession();
 
-    if(isNaN(take)){
-        return NextResponse.json({
-            message: 'Take value is not a number',
-          }, {status: 400})
-    }
-    if(isNaN(skip)){
-        return NextResponse.json({
-            message: 'Skip value is not a number',
-          }, {status: 400})
-    }
-  
-    const todos = await prisma.todo.findMany({
-        take,
-        skip,
-    });
+  if (!user || !user.id) {
+    return NextResponse.json("Unauthorized", { status: 401 });
+  }
 
-  return new NextResponse(JSON.stringify({
-    data: todos
-  }), { status: 200 } );
+  if (isNaN(take)) {
+    return NextResponse.json(
+      {
+        message: "Take value is not a number",
+      },
+      { status: 400 }
+    );
+  }
+  if (isNaN(skip)) {
+    return NextResponse.json(
+      {
+        message: "Skip value is not a number",
+      },
+      { status: 400 }
+    );
+  }
+
+  const todos = await prisma.todo.findMany({
+    where: {
+      userId: user.id,
+    },
+    take,
+    skip,
+  });
+
+  return new NextResponse(
+    JSON.stringify({
+      data: todos,
+    }),
+    { status: 200 }
+  );
 }
 
 const postSchema = yup.object({
-    description: yup.string().required(),
-    complete: yup.boolean().optional().default(false),
+  description: yup.string().required(),
+  complete: yup.boolean().optional().default(false),
 });
 
-export async function POST(request: Request) { 
+export async function POST(request: Request) {
+  const user = await getUserServerSession();
 
-    try {
-        const {complete, description} = await postSchema.validate(await request.json());
-    
-        const todo = await prisma.todo.create({
-            data: {
-                complete, 
-                description
-            }
-        });
+  if (!user || !user.id) {
+    return NextResponse.json("Unauthorized", { status: 401 });
+  }
 
-        return NextResponse.json(todo);
-    }catch(error){
-        return NextResponse.json(error, {status: 400});
-    }
+  try {
+    const { complete, description } = await postSchema.validate(
+      await request.json()
+    );
+
+    const todo = await prisma.todo.create({
+      data: {
+        complete,
+        description,
+        userId: user.id,
+      },
+    });
+
+    return NextResponse.json(todo);
+  } catch (error) {
+    return NextResponse.json(error, { status: 400 });
+  }
 }
 
-export async function DELETE(request: Request) {
+export async function DELETE() {
+  const user = await getUserServerSession();
 
-    try {       
-    
-        const todo = await prisma.todo.deleteMany({
-            where:{
-                complete: true
-            }
-        });
+  if (!user || !user.id) {
+    return NextResponse.json("Unauthorized", { status: 401 });
+  }
 
-        return NextResponse.json(todo);
-    }catch(error){
-        return NextResponse.json(error, {status: 400});
-    }
+  try {
+    const todo = await prisma.todo.deleteMany({
+      where: {
+        userId: user.id,
+        complete: true,
+      },
+    });
+
+    return NextResponse.json(todo);
+  } catch (error) {
+    return NextResponse.json(error, { status: 400 });
+  }
 }

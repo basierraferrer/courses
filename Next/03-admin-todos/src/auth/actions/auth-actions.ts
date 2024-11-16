@@ -1,5 +1,11 @@
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
+import { auth } from "@/auth";
+
+export const getUserServerSession = async () => {
+  const session = await auth();
+  return session?.user;
+};
 
 /**
  * Try to get the user from db if the user no exists we create the user and return data for session
