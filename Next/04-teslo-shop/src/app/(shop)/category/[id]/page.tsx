@@ -1,21 +1,38 @@
-import { notFound } from "next/navigation";
+import { ProductGrid, Title } from "@/components";
+import { Category } from "@/interfaces";
+import { initialData } from "@/seed/seed";
+// import { notFound } from "next/navigation";
 
 interface Props {
   params: {
-    id: string;
+    id: Category;
   };
 }
 
-export default function Page({ params }: Props) {
-  const { id } = params;
+export default async function Page({ params }: Props) {
+  const { id } = await params;
 
-  if (id === "kids") {
+  const labelByCategory: Record<Category, string> = {
+    kid: "niños",
+    men: "hombres",
+    unisex: "todos",
+    women: "mujeres",
+  };
+
+  /*  if (!Object.values(Categories).includes(id as Categories)) {
     notFound();
-  }
+  } */
+
+  const products = initialData.products.filter((item) => item.gender === id);
 
   return (
     <div>
-      <h1>Hello Category Page</h1>
+      <Title
+        title={`Articulos para ${labelByCategory[id]}`}
+        className="mb-2"
+      ></Title>
+
+      <ProductGrid products={products} />
     </div>
   );
 }

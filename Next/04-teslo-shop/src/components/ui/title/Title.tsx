@@ -2,12 +2,12 @@ import { titleFont } from "@/config/fonts";
 import React from "react";
 
 interface Props {
-  className: string;
+  className?: string;
   subtitle?: string;
   title: string;
 }
 
-export const Title = ({ title, subtitle, className }: Props) => {
+export const Title = ({ title, subtitle, className = "" }: Props) => {
   return (
     <div className={`mt-3 ${className}`}>
       <h1
