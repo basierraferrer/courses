@@ -1,7 +1,7 @@
-import { Title } from "@/components";
-import { initialData } from "@/seed/seed";
-import Image from "next/image";
-import Link from "next/link";
+import {Title} from '@/components';
+import {initialData} from '@/seed/seed';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const productsInCart = [
   initialData.products[0],
@@ -24,7 +24,7 @@ export default function Page() {
             </Link>
 
             {/** Items */}
-            {productsInCart.map((item) => (
+            {productsInCart.map(item => (
               <div className="flex mb-5" key={item.slug}>
                 <Image
                   alt={item.title}
@@ -32,8 +32,8 @@ export default function Page() {
                   width={100}
                   height={100}
                   style={{
-                    width: "100px",
-                    height: "100px",
+                    width: '100px',
+                    height: '100px',
                   }}
                   className="mr-5 rounded"
                 />
@@ -79,11 +79,11 @@ export default function Page() {
             <div className="mt-5 mb-2 w-full">
               <p className="mb-5">
                 <span>
-                  Al hacer click en &quot;Colocar orden&quot;, aceptas nuestros{" "}
+                  Al hacer click en &quot;Colocar orden&quot;, aceptas nuestros{' '}
                   <a href="#" className="underline">
                     términos y condiciones
-                  </a>{" "}
-                  y{" "}
+                  </a>{' '}
+                  y{' '}
                   <a href="#" className="underline">
                     política de privacidad
                   </a>
@@ -91,8 +91,7 @@ export default function Page() {
               </p>
               <Link
                 href="/orders/123"
-                className="flex mt-5 btn-primary justify-center"
-              >
+                className="flex mt-5 btn-primary justify-center">
                 Colocar orden
               </Link>
             </div>

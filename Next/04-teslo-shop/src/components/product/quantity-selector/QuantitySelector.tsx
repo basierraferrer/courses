@@ -1,12 +1,12 @@
-"use client";
-import React, { useState } from "react";
-import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
+'use client';
+import React, {useState} from 'react';
+import {IoAddCircleOutline, IoRemoveCircleOutline} from 'react-icons/io5';
 
 interface Props {
   quantity: number;
 }
 
-export const QuantitySelector = ({ quantity }: Props) => {
+export const QuantitySelector = ({quantity}: Props) => {
   const [count, setCount] = useState(quantity);
 
   const onQuantityChanged = (value: number) => {

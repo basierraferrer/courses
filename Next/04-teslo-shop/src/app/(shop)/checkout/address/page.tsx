@@ -1,5 +1,5 @@
-import { Title } from "@/components";
-import Link from "next/link";
+import {Title} from '@/components';
+import Link from 'next/link';
 
 export default function AddressPage() {
   return (
@@ -54,8 +54,7 @@ export default function AddressPage() {
           <div className="flex flex-col mb-2 sm:mt-10">
             <Link
               href="/checkout"
-              className="btn-primary flex w-full sm:w-1/2 justify-center "
-            >
+              className="btn-primary flex w-full sm:w-1/2 justify-center ">
               Siguiente
             </Link>
           </div>

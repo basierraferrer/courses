@@ -1,16 +1,16 @@
-"use client";
-import React, { useState } from "react";
-import { Swiper as SwiperObj } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper/modules";
+'use client';
+import React, {useState} from 'react';
+import {Swiper as SwiperObj} from 'swiper';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import {Autoplay, FreeMode, Navigation, Thumbs} from 'swiper/modules';
 
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-import "./slideshow.css";
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+import './slideshow.css';
 
-import Image from "next/image";
+import Image from 'next/image';
 
 interface Props {
   images: string[];
@@ -18,15 +18,15 @@ interface Props {
   className?: string;
 }
 
-export const Slideshow = ({ images, title, className = "" }: Props) => {
+export const Slideshow = ({images, title, className = ''}: Props) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObj>();
   return (
     <div className={`col-span-1 md:col-span-2 ${className}`}>
       <Swiper
         style={
           {
-            "--swiper-navigation-color": "#fff",
-            "--swiper-pagination-color": "#fff",
+            '--swiper-navigation-color': '#fff',
+            '--swiper-pagination-color': '#fff',
           } as React.CSSProperties
         }
         spaceBetween={10}
@@ -38,8 +38,7 @@ export const Slideshow = ({ images, title, className = "" }: Props) => {
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
-        className="mySwiper2"
-      >
+        className="mySwiper2">
         {images.map((imgSrc, index) => (
           <SwiperSlide key={`${title}-image-${index}`}>
             <Image
@@ -59,8 +58,7 @@ export const Slideshow = ({ images, title, className = "" }: Props) => {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
-      >
+        className="mySwiper">
         {images.map((imgSrc, index) => (
           <SwiperSlide key={`${title}-image-${index}`}>
             <Image

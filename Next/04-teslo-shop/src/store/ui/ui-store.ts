@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import {create} from 'zustand';
 
 interface Store {
   isSideMenuOpen: boolean;
@@ -6,8 +6,8 @@ interface Store {
   closeSideMenu: () => void;
 }
 
-export const useUIStore = create<Store>()((set) => ({
+export const useUIStore = create<Store>()(set => ({
   isSideMenuOpen: false,
-  openSideMenu: () => set({ isSideMenuOpen: true }),
-  closeSideMenu: () => set({ isSideMenuOpen: false }),
+  openSideMenu: () => set({isSideMenuOpen: true}),
+  closeSideMenu: () => set({isSideMenuOpen: false}),
 }));

@@ -1,16 +1,12 @@
-import { Footer, Sidebar, TopMenu } from "@/components";
-import { Metadata } from "next";
+import {Footer, Sidebar, TopMenu} from '@/components';
+import {Metadata} from 'next';
 
 export const metadata: Metadata = {
-  title: "Teslo shop",
-  description: "Tienda virtual de productos",
+  title: 'Teslo shop',
+  description: 'Tienda virtual de productos',
 };
 
-export default function ShopLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ShopLayout({children}: {children: React.ReactNode}) {
   return (
     <main className="min-h-screen">
       <TopMenu />

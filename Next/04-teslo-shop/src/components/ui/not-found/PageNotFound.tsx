@@ -1,6 +1,6 @@
-import { titleFont } from "@/config/fonts";
-import Link from "next/link";
-import React from "react";
+import {titleFont} from '@/config/fonts';
+import Link from 'next/link';
+import React from 'react';
 
 export const PageNotFound = () => {
   return (
@@ -12,8 +12,7 @@ export const PageNotFound = () => {
           <span>Puedes regresar al </span>
           <Link
             href="/"
-            className=" font-normal hover:underline transition-all"
-          >
+            className=" font-normal hover:underline transition-all">
             inicio
           </Link>
         </p>

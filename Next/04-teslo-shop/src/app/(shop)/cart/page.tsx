@@ -1,8 +1,8 @@
-import { QuantitySelector, Title } from "@/components";
+import {QuantitySelector, Title} from '@/components';
 // import { initialData } from "@/seed/seed";
-import Image from "next/image";
-import Link from "next/link";
-import { redirect } from "next/navigation";
+import Image from 'next/image';
+import Link from 'next/link';
+import {redirect} from 'next/navigation';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const productsInCart: any[] = [
@@ -12,7 +12,7 @@ const productsInCart: any[] = [
 ];
 
 export default function Page() {
-  if (!productsInCart.length) redirect("/empty");
+  if (!productsInCart.length) redirect('/empty');
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">
@@ -27,7 +27,7 @@ export default function Page() {
             </Link>
 
             {/** Items */}
-            {productsInCart.map((item) => (
+            {productsInCart.map(item => (
               <div className="flex mb-5" key={item.slug}>
                 <Image
                   alt={item.title}
@@ -35,8 +35,8 @@ export default function Page() {
                   width={100}
                   height={100}
                   style={{
-                    width: "100px",
-                    height: "100px",
+                    width: '100px',
+                    height: '100px',
                   }}
                   className="mr-5 rounded"
                 />
@@ -68,8 +68,7 @@ export default function Page() {
             <div>
               <Link
                 href="/checkout/address"
-                className="flex mt-5 btn-primary justify-center"
-              >
+                className="flex mt-5 btn-primary justify-center">
                 Checkout
               </Link>
             </div>

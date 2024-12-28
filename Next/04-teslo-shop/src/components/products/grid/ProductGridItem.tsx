@@ -1,14 +1,14 @@
-"use client";
-import { Product } from "@/interfaces";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
+'use client';
+import {Product} from '@/interfaces';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, {useState} from 'react';
 
 interface Props {
   product: Product;
 }
 
-export const ProductGridItem = ({ product }: Props) => {
+export const ProductGridItem = ({product}: Props) => {
   const [displayImage, setDisplayImage] = useState(product.images[0]);
   const handleChangeImage = (index: number) => {
     setDisplayImage(product.images[index]);

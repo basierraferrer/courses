@@ -1,8 +1,8 @@
 // https://tailwindcomponents.com/component/hoverable-table
-import { Title } from "@/components";
+import {Title} from '@/components';
 
-import Link from "next/link";
-import { IoCardOutline } from "react-icons/io5";
+import Link from 'next/link';
+import {IoCardOutline} from 'react-icons/io5';
 
 export default function Page() {
   return (
@@ -15,26 +15,22 @@ export default function Page() {
             <tr>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-              >
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 #ID
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-              >
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Nombre completo
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-              >
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Estado
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-              >
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Opciones
               </th>
             </tr>

@@ -1,8 +1,8 @@
-import { titleFont } from "@/config/fonts";
-import Link from "next/link";
-import React from "react";
-import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
-import { MenuButton } from "./MenuButton";
+import {titleFont} from '@/config/fonts';
+import Link from 'next/link';
+import React from 'react';
+import {IoCartOutline, IoSearchOutline} from 'react-icons/io5';
+import {MenuButton} from './MenuButton';
 
 export const TopMenu = () => {
   return (
@@ -20,26 +20,22 @@ export const TopMenu = () => {
       <div className="hidden sm:block">
         <Link
           className="m-2 p-2 transition-all hover:bg-gray-100"
-          href="/gender/men"
-        >
+          href="/gender/men">
           Hombre
         </Link>
         <Link
           className="m-2 p-2 transition-all hover:bg-gray-100"
-          href="/gender/women"
-        >
+          href="/gender/women">
           Mujeres
         </Link>
         <Link
           className="m-2 p-2 transition-all hover:bg-gray-100"
-          href="/gender/kid"
-        >
+          href="/gender/kid">
           Niños
         </Link>
         <Link
           className="m-2 p-2 transition-all hover:bg-gray-100"
-          href="/gender/unisex"
-        >
+          href="/gender/unisex">
           Unisex
         </Link>
       </div>

@@ -1,8 +1,8 @@
-import { Title } from "@/components";
-import { initialData } from "@/seed/seed";
-import clsx from "clsx";
-import Image from "next/image";
-import { IoCardOutline } from "react-icons/io5";
+import {Title} from '@/components';
+import {initialData} from '@/seed/seed';
+import clsx from 'clsx';
+import Image from 'next/image';
+import {IoCardOutline} from 'react-icons/io5';
 
 const productsInCart = [
   initialData.products[0],
@@ -16,8 +16,8 @@ interface Props {
   }>;
 }
 
-export default async function Page({ params }: Props) {
-  const { id } = await params;
+export default async function Page({params}: Props) {
+  const {id} = await params;
   // Todo: verificar id
 
   return (
@@ -30,20 +30,19 @@ export default async function Page({ params }: Props) {
           <div className="flex flex-col mt-5">
             <div
               className={clsx(
-                "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
+                'flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5',
                 {
                   //"bg-red-500": true,
-                  "bg-green-600": true,
-                }
-              )}
-            >
+                  'bg-green-600': true,
+                },
+              )}>
               <IoCardOutline size={30} />
               {/*<span className="mx-2">Pendiente de pago</span>*/}
               <span className="mx-2">Pagada</span>
             </div>
 
             {/** Items */}
-            {productsInCart.map((item) => (
+            {productsInCart.map(item => (
               <div className="flex mb-5" key={item.slug}>
                 <Image
                   alt={item.title}
@@ -51,8 +50,8 @@ export default async function Page({ params }: Props) {
                   width={100}
                   height={100}
                   style={{
-                    width: "100px",
-                    height: "100px",
+                    width: '100px',
+                    height: '100px',
                   }}
                   className="mr-5 rounded"
                 />
@@ -98,13 +97,12 @@ export default async function Page({ params }: Props) {
             <div className="mt-5 mb-2 w-full">
               <div
                 className={clsx(
-                  "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
+                  'flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5',
                   {
                     //"bg-red-500": true,
-                    "bg-green-600": true,
-                  }
-                )}
-              >
+                    'bg-green-600': true,
+                  },
+                )}>
                 <IoCardOutline size={30} />
                 {/*<span className="mx-2">Pendiente de pago</span>*/}
                 <span className="mx-2">Pagada</span>
