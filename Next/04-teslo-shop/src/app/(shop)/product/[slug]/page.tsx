@@ -1,11 +1,12 @@
 import { initialData } from "@/seed/seed";
 import { ProductDetail, Slideshow, SlideshowMobile } from "@/components";
 import { notFound } from "next/navigation";
+import { Product } from "@/interfaces";
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default async function NamePage({ params }: Props) {
@@ -15,6 +16,8 @@ export default async function NamePage({ params }: Props) {
   if (!product) {
     notFound();
   }
+
+  product.id = product.slug;
 
   return (
     <div className="mt-5 mb-20 grid md:grid-cols-3 gap-3">
@@ -31,7 +34,7 @@ export default async function NamePage({ params }: Props) {
         className="block md:hidden"
       />
       {/** Details */}
-      <ProductDetail product={product} />
+      <ProductDetail product={product as Product} />
     </div>
   );
 }

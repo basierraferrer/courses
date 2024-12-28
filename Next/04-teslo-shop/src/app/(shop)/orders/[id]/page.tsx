@@ -11,13 +11,13 @@ const productsInCart = [
 ];
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function Page({ params }: Props) {
-  const { id } = params;
+export default async function Page({ params }: Props) {
+  const { id } = await params;
   // Todo: verificar id
 
   return (

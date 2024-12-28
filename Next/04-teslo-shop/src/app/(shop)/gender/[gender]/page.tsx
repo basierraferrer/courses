@@ -6,12 +6,12 @@ import { Gender } from "@prisma/client";
 
 
 interface Props {
-  params: {
+  params: Promise<{
     gender: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     page?: string;
-  }
+  }>
 }
 
 export default async function Page({ params, searchParams }: Props) {
