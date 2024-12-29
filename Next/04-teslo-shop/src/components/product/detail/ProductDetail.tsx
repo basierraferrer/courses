@@ -1,15 +1,16 @@
-import {SizeSelector, QuantitySelector} from '@/components';
-import {titleFont} from '@/config/fonts';
-import {Product} from '@/interfaces';
+import { SizeSelector, QuantitySelector, StockLabel } from '@/components';
+import { titleFont } from '@/config/fonts';
+import { Product } from '@/interfaces';
 import React from 'react';
 
 interface Props {
   product: Product;
 }
 
-export const ProductDetail = ({product}: Props) => {
+export const ProductDetail = ({ product }: Props) => {
   return (
     <div className="col-span-1 px-5">
+      <StockLabel slug={product.slug} />
       <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
         {product.title}
       </h1>

@@ -1,7 +1,7 @@
 export const revalidate = 60;
 
-import {getPaginatedProductsWithImages} from '@/actions';
-import {Pagination, ProductGrid, Title} from '@/components';
+import { getPaginatedProductsWithImages } from '@/actions';
+import { Pagination, ProductGrid, Title } from '@/components';
 
 interface Props {
   searchParams: Promise<{
@@ -9,11 +9,12 @@ interface Props {
   }>;
 }
 
-export default async function Home({searchParams}: Props) {
-  const {page} = await searchParams;
+
+export default async function Home({ searchParams }: Props) {
+  const { page } = await searchParams;
   const currentPage = page ? parseInt(page) : 1;
 
-  const {products, totalPages} = await getPaginatedProductsWithImages({
+  const { products, totalPages } = await getPaginatedProductsWithImages({
     page: currentPage,
   });
 
