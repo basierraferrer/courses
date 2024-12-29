@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Products',
+  description: 'Productos',
+};
+
 export default function Page() {
   return (
     <div>

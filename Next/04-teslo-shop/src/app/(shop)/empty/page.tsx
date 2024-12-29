@@ -1,7 +1,13 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
-import {IoCartOutline} from 'react-icons/io5';
+import { IoCartOutline } from 'react-icons/io5';
 
-export default function NamePage() {
+export const metadata: Metadata = {
+  title: 'Empty',
+  description: 'Tienda virtual de productos',
+};
+
+export default function Page() {
   return (
     <div className="flex justify-center items-center h-[800px]">
       <IoCartOutline size={80} className="mx-5" />

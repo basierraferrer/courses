@@ -1,8 +1,9 @@
-import {Title} from '@/components';
-import {initialData} from '@/seed/seed';
+import { Title } from '@/components';
+import { initialData } from '@/seed/seed';
 import clsx from 'clsx';
+import { Metadata } from 'next';
 import Image from 'next/image';
-import {IoCardOutline} from 'react-icons/io5';
+import { IoCardOutline } from 'react-icons/io5';
 
 const productsInCart = [
   initialData.products[0],
@@ -16,8 +17,17 @@ interface Props {
   }>;
 }
 
-export default async function Page({params}: Props) {
-  const {id} = await params;
+export async function generateMetadata({ params }: Props,): Promise<Metadata> {
+  const { id } = await params;
+
+  return {
+    title: `Oder #${id}`,
+    description: 'Verificación de orden',
+  }
+}
+
+export default async function Page({ params }: Props) {
+  const { id } = await params;
   // Todo: verificar id
 
   return (

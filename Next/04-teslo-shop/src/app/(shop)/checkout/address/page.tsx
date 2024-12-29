@@ -1,5 +1,11 @@
-import {Title} from '@/components';
+import { Title } from '@/components';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Checkout - Address',
+  description: 'Dirección para finalizar orden',
+};
 
 export default function AddressPage() {
   return (

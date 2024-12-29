@@ -1,8 +1,14 @@
 // https://tailwindcomponents.com/component/hoverable-table
-import {Title} from '@/components';
+import { Title } from '@/components';
+import { Metadata } from 'next';
 
 import Link from 'next/link';
-import {IoCardOutline} from 'react-icons/io5';
+import { IoCardOutline } from 'react-icons/io5';
+
+export const metadata: Metadata = {
+  title: 'Orders',
+  description: 'Productos en el carrito',
+};
 
 export default function Page() {
   return (

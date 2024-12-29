@@ -1,8 +1,9 @@
-import {QuantitySelector, Title} from '@/components';
+import { QuantitySelector, Title } from '@/components';
+import { Metadata } from 'next';
 // import { initialData } from "@/seed/seed";
 import Image from 'next/image';
 import Link from 'next/link';
-import {redirect} from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const productsInCart: any[] = [
@@ -10,6 +11,12 @@ const productsInCart: any[] = [
   initialData.products[1],
   initialData.products[2], */
 ];
+
+export const metadata: Metadata = {
+  title: 'Cart',
+  description: 'Productos en el carrito',
+};
+
 
 export default function Page() {
   if (!productsInCart.length) redirect('/empty');
