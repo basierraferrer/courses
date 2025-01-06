@@ -1,23 +1,27 @@
-import { Metadata } from 'next';
 import Link from 'next/link';
 import { IoCartOutline } from 'react-icons/io5';
 
-export const metadata: Metadata = {
-  title: 'Empty',
-  description: 'Tienda virtual de productos',
-};
-
-export default function Page() {
+export default function EmptyPage() {
   return (
     <div className="flex justify-center items-center h-[800px]">
-      <IoCartOutline size={80} className="mx-5" />
+
+      <IoCartOutline size={ 80 } className="mx-5" />
 
       <div className="flex flex-col items-center">
-        <h1 className="text-xl font-semibold">Tu carrito está vacío</h1>
-        <Link href="/" className="text-blue-500 mt-2 text-4xl">
+        <h1 className="text-xl font-semibold">
+          Tu carrito está vacío
+        </h1>
+
+        <Link 
+          href='/'
+          className="text-blue-500 mt-2 text-4xl"
+        >
           Regresar
         </Link>
+
       </div>
+
+      
     </div>
   );
 }

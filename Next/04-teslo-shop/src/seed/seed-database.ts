@@ -1,54 +1,86 @@
-import {initialData} from './seed';
+import { create } from 'zustand';
+import { initialData } from './seed';
 import prisma from '../lib/prisma';
 
+
+
 async function main() {
+
   // 1. Borrar registros previos
+  // await Promise.all( [
   await prisma.productImage.deleteMany();
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
+  // ]);
+  
+  const { categories, products } = initialData;
 
-  const {categories, products} = initialData;
 
-  // 2. Insertar categorias
-  const categoriesData = categories.map(categoryName => ({
-    name: categoryName,
-  }));
-
-  const categoriesDB = await prisma.category.createManyAndReturn({
-    data: categoriesData,
+  //  Categorias
+  // {
+  //   name: 'Shirt'
+  // }
+  const categoriesData = categories.map( (name) => ({ name }));
+  
+  await prisma.category.createMany({
+    data: categoriesData
   });
 
-  const categoriesMapped = categoriesDB.reduce(
-    (map, category) => {
-      map[category.name.toLowerCase()] = category.id;
-      return map;
-    },
-    {} as Record<string, string>,
-  );
+  
+  const categoriesDB = await prisma.category.findMany();
+  
+  const categoriesMap = categoriesDB.reduce( (map, category) => {
+    map[ category.name.toLowerCase()] = category.id;
+    return map;
+  }, {} as Record<string, string>); //<string=shirt, string=categoryID>
+  
+  
 
-  products.forEach(async ({type, images, ...rest}) => {
-    // 3. Insertar Producto
-    const productDB = await prisma.product.create({
+  // Productos
+
+  products.forEach( async(product) => {
+
+    const { type, images, ...rest } = product;
+
+    const dbProduct = await prisma.product.create({
       data: {
         ...rest,
-        categoryId: categoriesMapped[type],
-      },
-    });
+        categoryId: categoriesMap[type]
+      }
+    })
 
-    // 4. Insertar imagenes de producto
-    const imageData = images.map(image => ({
+
+    // Images
+    const imagesData = images.map( image => ({
       url: image,
-      productId: productDB.id,
+      productId: dbProduct.id
     }));
 
-    await prisma.productImage.createMany({data: imageData});
+    await prisma.productImage.createMany({
+      data: imagesData
+    });
+
   });
 
-  console.log('Seed ejecutado correctamente');
+
+
+
+
+  console.log( 'Seed ejecutado correctamente' );
 }
 
-(() => {
-  if (process.env.NODE_ENV === 'production') return;
+
+
+
+
+
+
+
+
+( () => {
+
+  if ( process.env.NODE_ENV === 'production' ) return;
+
 
   main();
-})();
+} )();

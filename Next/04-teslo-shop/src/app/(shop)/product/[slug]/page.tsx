@@ -1,62 +1,94 @@
-export const revalidate = 604800;
+export const revalidate = 604800; //7 días
+import { Metadata, ResolvingMetadata } from "next";
 
-import { ProductDetail, Slideshow, SlideshowMobile } from '@/components';
-import { notFound } from 'next/navigation';
-import { Product } from '@/interfaces';
-import { getProductBySlug } from '@/actions/product/get-by-slug';
-import { Metadata, ResolvingMetadata } from 'next';
+import { notFound } from "next/navigation";
 
+import { titleFont } from "@/config/fonts";
+import {
+  ProductMobileSlideshow,
+  ProductSlideshow,
+  QuantitySelector,
+  SizeSelector,
+  StockLabel,
+} from "@/components";
+import { getProductBySlug } from "@/actions";
+import { AddToCart } from './ui/AddToCart';
 
 interface Props {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 }
 
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug;
+
+  // fetch data
   const product = await getProductBySlug(slug);
 
-  const previousImages = (await parent).openGraph?.images || [];
-  const images = [`http://localhost:3000/products/${product?.images[1]}`, ...previousImages]
+  // optionally access and extend (rather than replace) parent metadata
+  // const previousImages = (await parent).openGraph?.images || []
 
   return {
-    title: product?.title ?? 'Producto no encontrado',
-    description: product?.description ?? '',
+    title: product?.title ?? "Producto no encontrado",
+    description: product?.description ?? "",
     openGraph: {
-      title: product?.title ?? 'Producto no encontrado',
-      description: product?.description ?? '',
-      images,
-    }
-  }
+      title: product?.title ?? "Producto no encontrado",
+      description: product?.description ?? "",
+      // images: [], // https://misitioweb.com/products/image.png
+      images: [ `/products/${ product?.images[1] }`],
+    },
+  };
 }
 
-export default async function NamePage({ params }: Props) {
-  const { slug } = await params;
+export default async function ProductBySlugPage({ params }: Props) {
+  const { slug } = params;
   const product = await getProductBySlug(slug);
+  console.log(product);
 
   if (!product) {
     notFound();
   }
 
-  product.id = product.slug;
-
   return (
-    <div className="mt-5 mb-20 grid md:grid-cols-3 gap-3">
-      {/** Slideshow desktop*/}
-      <Slideshow
-        images={product.images}
-        title={product.title}
-        className="hidden md:block"
-      />
-      {/** Slideshow mobile*/}
-      <SlideshowMobile
-        images={product.images}
-        title={product.title}
-        className="block md:hidden"
-      />
-      {/** Details */}
-      <ProductDetail product={product as Product} />
+    <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
+      {/* Slideshow */}
+      <div className="col-span-1 md:col-span-2 ">
+        {/* Mobile Slideshow */}
+        <ProductMobileSlideshow
+          title={product.title}
+          images={product.images}
+          className="block md:hidden"
+        />
+
+        {/* Desktop Slideshow */}
+        <ProductSlideshow
+          title={product.title}
+          images={product.images}
+          className="hidden md:block"
+        />
+      </div>
+
+      {/* Detalles */}
+      <div className="col-span-1 px-5">
+        <StockLabel slug={product.slug} />
+
+        <h1 className={` ${titleFont.className} antialiased font-bold text-xl`}>
+          {product.title}
+        </h1>
+
+        <p className="text-lg mb-5">${product.price}</p>
+
+        <AddToCart product={ product } />
+
+        {/* Descripción */}
+        <h3 className="font-bold text-sm">Descripción</h3>
+        <p className="font-light">{product.description}</p>
+      </div>
     </div>
   );
 }

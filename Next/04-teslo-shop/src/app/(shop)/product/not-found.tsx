@@ -1,9 +1,10 @@
-import {PageNotFound} from '@/components';
+import { PageNotFound } from '@/components';
 
-export default function Page() {
+
+export default function NotFoundPageBySlug() {
+
+
   return (
-    <div>
-      <PageNotFound />
-    </div>
+    <PageNotFound />
   );
 }
