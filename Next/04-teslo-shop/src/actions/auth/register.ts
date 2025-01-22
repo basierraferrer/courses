@@ -1,40 +1,42 @@
 'use server';
 
 import prisma from '@/lib/prisma';
-import bcryptjs from 'bcryptjs';
+import bcryptjs from 'bcryptjs'
 
-interface RegisterUser {
-  email: string;
-  password: string;
-  name: string;
-}
 
-export const registerUser = async ({email, password, name}: RegisterUser) => {
+export const registerUser = async( name: string, email: string, password: string ) => {
+
+
   try {
+    
     const user = await prisma.user.create({
       data: {
+        name: name,
         email: email.toLowerCase(),
-        password: bcryptjs.hashSync(password),
-        name,
+        password: bcryptjs.hashSync( password ),
       },
       select: {
         id: true,
-        email: true,
         name: true,
-      },
-    });
+        email: true,
+      }
+    })
 
     return {
       ok: true,
-      user,
-      message: 'Usuario creado correctamente',
-    };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      user: user,
+      message: 'Usuario creado'
+    }
+
   } catch (error) {
-    console.error('**__** ~ registerUser ~ error:');
+    console.log(error);
+
     return {
       ok: false,
-      message: 'No se pudo crear el usuario',
-    };
+      message: 'No se pudo crear el usuario'
+    }
   }
-};
+
+  
+
+}
