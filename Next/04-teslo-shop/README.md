@@ -18,7 +18,7 @@ This is a clone of Tesla shop, created with [Next.js](https://nextjs.org).
 4. Levantar base de datos `yarn db`
 5. Correr migración de Prisma `yarn prisma`
 6. Ejecutar seed `yarn seed`
-7. Correr proyecto `yarn dev` 
+7. Limpiar browser cache
+8. Correr proyecto `yarn dev`
 
-##  Ejecutar en Prod
-
+## Ejecutar en Prod

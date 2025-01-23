@@ -13,7 +13,6 @@ export const authConfig: NextAuthConfig = {
 
   callbacks: {
     async authorized({auth, request: {nextUrl}}) {
-      console.log({auth});
       if (auth && auth.user) {
         return true;
       }

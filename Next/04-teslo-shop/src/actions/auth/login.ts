@@ -13,9 +13,8 @@ export async function authenticate(
     });
 
     return 'Success';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.log(error);
-
     return 'CredentialsSignin';
   }
 }
@@ -26,7 +25,6 @@ export const login = async (email: string, password: string) => {
 
     return {ok: true};
   } catch (error) {
-    console.log(error);
     return {
       ok: false,
       message: 'No se pudo iniciar sesión',

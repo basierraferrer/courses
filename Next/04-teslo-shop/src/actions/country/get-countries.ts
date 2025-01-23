@@ -11,8 +11,8 @@ export const getCountries = async () => {
     });
 
     return countries;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.log('**__** ~ getCountries ~ error:', error);
     return [];
   }
 };

@@ -9,7 +9,6 @@ export default async function AddressPage() {
 
   const countries = await getCountries();
   const address = await getUserAddress(session?.user.id as string);
-  console.log("**__** ~ AddressPage ~ address:", address);
 
   return (
     <div className="flex flex-col sm:justify-center sm:items-center mb-72 px-10 sm:px-0">

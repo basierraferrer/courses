@@ -25,7 +25,6 @@ export const deleteUserAddress = async (userId: string) => {
     };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    //console.error('**__** ~ deleteUserAddress ~ error:', error);
     return {
       ok: false,
       message: 'Error while deleting user address',
