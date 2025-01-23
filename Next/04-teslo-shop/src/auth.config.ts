@@ -12,7 +12,7 @@ export const authConfig: NextAuthConfig = {
   },
 
   callbacks: {
-    async authorized({auth, request: {nextUrl}}) {
+    async authorized({auth}) {
       if (auth && auth.user) {
         return true;
       }
