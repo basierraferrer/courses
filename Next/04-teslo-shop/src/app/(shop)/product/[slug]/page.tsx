@@ -7,8 +7,6 @@ import { titleFont } from "@/config/fonts";
 import {
   ProductMobileSlideshow,
   ProductSlideshow,
-  QuantitySelector,
-  SizeSelector,
   StockLabel,
 } from "@/components";
 import { getProductBySlug } from "@/actions";
@@ -40,7 +38,7 @@ export async function generateMetadata(
       title: product?.title ?? "Producto no encontrado",
       description: product?.description ?? "",
       // images: [], // https://misitioweb.com/products/image.png
-      images: [ `/products/${ product?.images[1] }`],
+      images: [`/products/${product?.images[1]}`],
     },
   };
 }
@@ -83,7 +81,7 @@ export default async function ProductBySlugPage({ params }: Props) {
 
         <p className="text-lg mb-5">${product.price}</p>
 
-        <AddToCart product={ product } />
+        <AddToCart product={product} />
 
         {/* Descripción */}
         <h3 className="font-bold text-sm">Descripción</h3>
