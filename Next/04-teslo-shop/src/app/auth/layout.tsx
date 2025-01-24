@@ -1,8 +1,9 @@
-import { auth } from "@/auth.config";
-import { redirect } from "next/navigation";
+import {auth} from '@/auth.config';
+import {redirect} from 'next/navigation';
 
-
-export default async function AuthLayout({ children }: {
+export default async function AuthLayout({
+  children,
+}: {
   children: React.ReactNode;
 }) {
   const session = await auth();
@@ -11,11 +12,7 @@ export default async function AuthLayout({ children }: {
   }
   return (
     <main className="flex justify-center">
-      <div className="w-full sm:w-[350px] px-10">
-
-        {children}
-
-      </div>
+      <div className="w-full sm:w-[350px] px-10">{children}</div>
     </main>
   );
 }

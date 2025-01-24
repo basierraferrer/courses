@@ -1,12 +1,10 @@
 export const revalidate = 60; // 60 segundos
 
-import { getPaginatedProductsWithImages } from '@/actions';
-import { Pagination, ProductGrid, Title } from '@/components';
+import {getPaginatedProductsWithImages} from '@/actions';
+import {Pagination, ProductGrid, Title} from '@/components';
 
-import { Gender } from '@prisma/client';
-import { redirect } from 'next/navigation';
-
-
+import {Gender} from '@prisma/client';
+import {redirect} from 'next/navigation';
 
 interface Props {
   params: Promise<{
@@ -17,35 +15,30 @@ interface Props {
   }>;
 }
 
-
-export default async function GenderByPage({ params, searchParams }: Props) {
-
-  const { gender } = await params;
-  const { page } = await searchParams;
+export default async function GenderByPage({params, searchParams}: Props) {
+  const {gender} = await params;
+  const {page} = await searchParams;
   const pagePagination = page ? parseInt(page) : 1;
 
-  const { products, totalPages } = await getPaginatedProductsWithImages({
+  const {products, totalPages} = await getPaginatedProductsWithImages({
     page: pagePagination,
     gender: gender as Gender,
   });
-
 
   if (products.length === 0) {
     redirect(`/gender/${gender}`);
   }
 
-
   const labels: Record<string, string> = {
-    'men': 'para hombres',
-    'women': 'para mujeres',
-    'kid': 'para niños',
-    'unisex': 'para todos'
-  }
+    men: 'para hombres',
+    women: 'para mujeres',
+    kid: 'para niños',
+    unisex: 'para todos',
+  };
 
   // if ( id === 'kids' ) {
   //   notFound();
   // }
-
 
   return (
     <>
@@ -55,12 +48,9 @@ export default async function GenderByPage({ params, searchParams }: Props) {
         className="mb-2"
       />
 
-      <ProductGrid
-        products={products}
-      />
+      <ProductGrid products={products} />
 
       <Pagination totalPages={totalPages} />
-
     </>
   );
 }

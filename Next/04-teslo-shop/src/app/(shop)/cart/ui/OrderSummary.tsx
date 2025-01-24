@@ -1,34 +1,27 @@
-"use client";
+'use client';
 
-import { useCartStore } from "@/store";
-import { currencyFormat } from "@/utils";
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from "react";
+import {useCartStore} from '@/store';
+import {currencyFormat} from '@/utils';
+import {useRouter} from 'next/navigation';
+import {useEffect, useState} from 'react';
 
 export const OrderSummary = () => {
-
   const router = useRouter();
 
   const [loaded, setLoaded] = useState(false);
-  const { itemsInCart, subTotal, tax, total } = useCartStore((state) =>
-    state.getSummaryInformation()
+  const {itemsInCart, subTotal, tax, total} = useCartStore(state =>
+    state.getSummaryInformation(),
   );
 
   useEffect(() => {
     setLoaded(true);
   }, []);
 
-
   useEffect(() => {
-
     if (itemsInCart === 0 && loaded === true) {
-      router.replace('/empty')
+      router.replace('/empty');
     }
-
-
-  }, [itemsInCart, loaded, router])
-
-
+  }, [itemsInCart, loaded, router]);
 
   if (!loaded) return <p>Loading...</p>;
 
@@ -36,7 +29,7 @@ export const OrderSummary = () => {
     <div className="grid grid-cols-2">
       <span>No. Productos</span>
       <span className="text-right">
-        {itemsInCart === 1 ? "1 artículo" : `${itemsInCart} artículos`}
+        {itemsInCart === 1 ? '1 artículo' : `${itemsInCart} artículos`}
       </span>
 
       <span>Subtotal</span>

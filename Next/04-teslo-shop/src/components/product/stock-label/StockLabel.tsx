@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { getStockBySlug } from "@/actions";
-import { titleFont } from "@/config/fonts";
-import { useEffect, useState } from "react";
+import {getStockBySlug} from '@/actions';
+import {titleFont} from '@/config/fonts';
+import {useEffect, useState} from 'react';
 
 interface Props {
   slug: string;
 }
 
-export const StockLabel = ({ slug }: Props) => {
+export const StockLabel = ({slug}: Props) => {
   const [stock, setStock] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,8 +26,7 @@ export const StockLabel = ({ slug }: Props) => {
     <>
       {isLoading ? (
         <h1
-          className={` ${titleFont.className} antialiased font-bold text-lg bg-gray-200 animate-pulse `}
-        >
+          className={` ${titleFont.className} antialiased font-bold text-lg bg-gray-200 animate-pulse `}>
           &nbsp;
         </h1>
       ) : (
