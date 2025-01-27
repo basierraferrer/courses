@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import clsx from 'clsx';
-import {useSession} from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import {
   IoCloseOutline,
   IoLogInOutline,
@@ -14,16 +14,16 @@ import {
   IoTicketOutline,
 } from 'react-icons/io5';
 
-import {useUIStore} from '@/store';
-import {logout} from '@/actions';
+import { useUIStore } from '@/store';
+import { logout } from '@/actions';
 
 export const Sidebar = () => {
   const isSideMenuOpen = useUIStore(state => state.isSideMenuOpen);
   const closeMenu = useUIStore(state => state.closeSideMenu);
 
-  const {data: session} = useSession();
+  const { data: session } = useSession();
   const isAuthenticated = !!session?.user;
-  const isAdmin = session?.user.role === 'admin';
+  const isAdmin = session?.user?.role === 'admin';
 
   return (
     <div>
@@ -77,8 +77,10 @@ export const Sidebar = () => {
             </Link>
 
             <Link
-              href="/"
-              className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all">
+              href="/orders"
+              className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+              onClick={() => closeMenu()}
+            >
               <IoTicketOutline size={30} />
               <span className="ml-3 text-xl">Ordenes</span>
             </Link>

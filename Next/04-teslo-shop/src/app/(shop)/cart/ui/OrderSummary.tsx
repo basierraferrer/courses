@@ -1,17 +1,16 @@
 'use client';
 
-import {useCartStore} from '@/store';
-import {currencyFormat} from '@/utils';
-import {useRouter} from 'next/navigation';
-import {useEffect, useState} from 'react';
+import { useCartStore } from '@/store';
+import { currencyFormat, getSummaryInformation } from '@/utils';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export const OrderSummary = () => {
   const router = useRouter();
 
   const [loaded, setLoaded] = useState(false);
-  const {itemsInCart, subTotal, tax, total} = useCartStore(state =>
-    state.getSummaryInformation(),
-  );
+  const cart = useCartStore(state => state.cart);
+  const { itemsInCart, subTotal, tax, total } = getSummaryInformation(cart);
 
   useEffect(() => {
     setLoaded(true);

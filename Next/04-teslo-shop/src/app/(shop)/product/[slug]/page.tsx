@@ -1,29 +1,28 @@
 export const revalidate = 604800; //7 días
-import {Metadata, ResolvingMetadata} from 'next';
+import { Metadata } from 'next';
 
-import {notFound} from 'next/navigation';
+import { notFound } from 'next/navigation';
 
-import {titleFont} from '@/config/fonts';
+import { titleFont } from '@/config/fonts';
 import {
   ProductMobileSlideshow,
   ProductSlideshow,
   StockLabel,
 } from '@/components';
-import {getProductBySlug} from '@/actions';
-import {AddToCart} from './ui/AddToCart';
+import { getProductBySlug } from '@/actions';
+import { AddToCart } from './ui/AddToCart';
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata(
-  {params}: Props,
-  parent: ResolvingMetadata,
+  { params }: Props,
 ): Promise<Metadata> {
   // read route params
-  const slug = params.slug;
+  const { slug } = await params;
 
   // fetch data
   const product = await getProductBySlug(slug);
@@ -43,8 +42,8 @@ export async function generateMetadata(
   };
 }
 
-export default async function ProductBySlugPage({params}: Props) {
-  const {slug} = params;
+export default async function ProductBySlugPage({ params }: Props) {
+  const { slug } = await params;
   const product = await getProductBySlug(slug);
   console.log(product);
 

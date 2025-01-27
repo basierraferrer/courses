@@ -9,7 +9,8 @@ interface State {
 
 export const useAddressStore = create<State>()(
   persist(
-    (set, get) => ({
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (set, _) => ({
       address: {
         firstName: '',
         lastName: '',

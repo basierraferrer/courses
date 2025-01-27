@@ -1,13 +1,13 @@
 'use client';
-import {deleteUserAddress, setUserAddress} from '@/actions';
-import {Address, Country} from '@/interfaces';
-import {useAddressStore} from '@/store';
+import { deleteUserAddress, setUserAddress } from '@/actions';
+import { Address, Country } from '@/interfaces';
+import { useAddressStore } from '@/store';
 import clsx from 'clsx';
-import {useSession} from 'next-auth/react';
-import {useRouter} from 'next/navigation';
-import React, {useEffect} from 'react';
-import {useForm} from 'react-hook-form';
-import {IoInformationCircle} from 'react-icons/io5';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { IoInformationCircle } from 'react-icons/io5';
 
 type FormInputs = {
   firstName: string;
@@ -23,22 +23,23 @@ type FormInputs = {
 
 interface Props {
   countries: Country[];
-  address?: Address | null;
+  address?: Partial<Address>;
 }
 
-export const AddressForm = ({countries, address}: Props) => {
+export const AddressForm = ({ countries, address }: Props) => {
   const {
     handleSubmit,
     register,
-    formState: {isValid},
+    formState: { isValid },
     reset,
   } = useForm<FormInputs>({
     defaultValues: {
-      //TODO: leer de DB
+      ...(address as Address),
+      rememberAddress: false
     },
   });
 
-  const {data: session} = useSession({
+  const { data: session } = useSession({
     required: true,
   });
 
@@ -49,9 +50,10 @@ export const AddressForm = ({countries, address}: Props) => {
   const [error, setError] = React.useState<string>();
   const router = useRouter();
 
-  const onSubmit = async ({rememberAddress, ...rest}: FormInputs) => {
+  const onSubmit = async ({ rememberAddress, ...rest }: FormInputs) => {
+    setAddress({ ...rest });
     if (rememberAddress) {
-      const result = await setUserAddress({...rest}, userId);
+      const result = await setUserAddress({ ...rest }, userId);
       if (!result.ok) {
         setError(result?.message);
         return;
@@ -63,7 +65,7 @@ export const AddressForm = ({countries, address}: Props) => {
         return;
       }
     }
-    setAddress({...rest});
+
     router.push('/checkout');
   };
 
@@ -87,7 +89,7 @@ export const AddressForm = ({countries, address}: Props) => {
         <input
           type="text"
           className="p-2 border rounded-md bg-gray-200"
-          {...register('firstName', {required: true})}
+          {...register('firstName', { required: true })}
         />
       </div>
 
@@ -96,7 +98,7 @@ export const AddressForm = ({countries, address}: Props) => {
         <input
           type="text"
           className="p-2 border rounded-md bg-gray-200"
-          {...register('lastName', {required: true})}
+          {...register('lastName', { required: true })}
         />
       </div>
 
@@ -105,7 +107,7 @@ export const AddressForm = ({countries, address}: Props) => {
         <input
           type="text"
           className="p-2 border rounded-md bg-gray-200"
-          {...register('address', {required: true})}
+          {...register('address', { required: true })}
         />
       </div>
 
@@ -123,7 +125,7 @@ export const AddressForm = ({countries, address}: Props) => {
         <input
           type="text"
           className="p-2 border rounded-md bg-gray-200"
-          {...register('postalCode', {required: true})}
+          {...register('postalCode', { required: true })}
         />
       </div>
 
@@ -132,7 +134,7 @@ export const AddressForm = ({countries, address}: Props) => {
         <input
           type="text"
           className="p-2 border rounded-md bg-gray-200"
-          {...register('city', {required: true})}
+          {...register('city', { required: true })}
         />
       </div>
 
@@ -140,8 +142,8 @@ export const AddressForm = ({countries, address}: Props) => {
         <span>País</span>
         <select
           className="p-2 border rounded-md bg-gray-200"
-          {...register('country', {required: true})}>
-          {countries.map(({id, name}) => (
+          {...register('country', { required: true })}>
+          {countries.map(({ id, name }) => (
             <option key={id} value={id}>
               {name}
             </option>
@@ -154,7 +156,7 @@ export const AddressForm = ({countries, address}: Props) => {
         <input
           type="text"
           className="p-2 border rounded-md bg-gray-200"
-          {...register('phone', {required: true})}
+          {...register('phone', { required: true })}
         />
       </div>
 
