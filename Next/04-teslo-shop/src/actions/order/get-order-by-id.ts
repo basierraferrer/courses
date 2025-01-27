@@ -59,7 +59,6 @@ export const getOrderById = async (orderId: string) => {
     };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.log('**__** ~ getOrderById ~ error:', error);
     return {
       ok: false,
       message: `No se encontró orden # ${orderId} - 404`,

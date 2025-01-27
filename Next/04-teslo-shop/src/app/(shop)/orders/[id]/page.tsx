@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getOrderById } from '@/actions';
-import { AddressDelivery, Items, Resume, Title } from '@/components';
+import { AddressDelivery, Items, Resume, Status, Title } from '@/components';
 
 import { redirect } from 'next/navigation';
 
-import { Status } from './ui/Status';
 import { getSummaryInformation } from '@/utils';
+import { StatusOrder } from '@/interfaces';
 
 
 
@@ -37,7 +37,7 @@ export default async function OrdersByIdPage({ params }: Props) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
           {/* Carrito */}
           <div className="flex flex-col mt-5">
-            <Status isPaid={order?.isPaid} />
+            <Status status={order?.status as StatusOrder} withBackground />
 
             {/* Items */}
             <Items products={order?.OrderItem.map(oItem => ({
@@ -70,7 +70,7 @@ export default async function OrdersByIdPage({ params }: Props) {
             <Resume itemsCount={itemsInCart} subtotal={subTotal} tax={tax} total={total} />
 
             <div className="mt-5 mb-2 w-full">
-              <Status isPaid={order?.isPaid} />
+              <Status status={order?.status as StatusOrder} withBackground />
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
-import clsx from 'clsx';
+import { Status } from '@/components';
 import Link from 'next/link';
 import React from 'react'
-import { IoCardOutline } from 'react-icons/io5';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,14 +45,7 @@ export const OrdersTable = ({ orders }: Props) => {
                 {order.OrderAddress.firstName} {order.OrderAddress.lastName}
               </td>
               <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                <IoCardOutline className={clsx({
-                  "text-green-800": order.isPaid,
-                  "text-yellow-500": !order.isPaid,
-                })} />
-                <span className={clsx("mx-2", {
-                  "text-green-800": order.isPaid,
-                  "text-yellow-500": !order.isPaid,
-                })}>{!order.isPaid ? 'Pendiente de pago' : 'Pagada'}</span>
+                <Status status={order.status} />
               </td>
               <td className="text-sm text-gray-900 font-light px-6 ">
                 <Link href={`/orders/${order.id}`} className="hover:underline text-blue-400 hover:text-blue-700">

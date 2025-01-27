@@ -29,6 +29,12 @@ enum Role {
   user
 }
 
+enum StatusOrder {
+  pending
+  paid
+  rejected
+}
+
 model Category {
   id      String    @id @default(uuid())
   name    String    @unique
@@ -106,12 +112,12 @@ model UserAddress {
 }
 
 model Order {
-  id           String    @id @default(uuid())
+  id           String      @id @default(uuid())
   subtotal     Float
   total        Float
   tax          Float
   itemsInOrder Int
-  isPaid       Boolean   @default(false)
+  status       StatusOrder @default(pending)
   paidAt       DateTime?
 
   createdAt    DateTime      @default(now())

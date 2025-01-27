@@ -19,11 +19,12 @@ type FormInputs = {
   country: string;
   phone: string;
   rememberAddress: boolean;
+  userId?: string;
 };
 
 interface Props {
   countries: Country[];
-  address?: Partial<Address>;
+  address?: Address | null;
 }
 
 export const AddressForm = ({ countries, address }: Props) => {

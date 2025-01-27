@@ -1,8 +1,8 @@
-import {Title} from '@/components';
-import {AddressForm} from './ui/AddressForm';
-import {getCountries} from '@/actions/country/get-countries';
-import {getUserAddress} from '@/actions';
-import {auth} from '@/auth.config';
+import { Title } from '@/components';
+import { AddressForm } from './ui/AddressForm';
+import { getCountries } from '@/actions/country/get-countries';
+import { getUserAddress } from '@/actions';
+import { auth } from '@/auth.config';
 
 export default async function AddressPage() {
   const session = await auth();

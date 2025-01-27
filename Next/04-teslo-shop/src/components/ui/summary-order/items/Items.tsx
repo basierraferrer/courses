@@ -9,7 +9,7 @@ interface Props {
 
 export const Items = ({ products }: Props) => {
   return (
-    <>
+    <div className='mt-5'>
       {products?.map(product => (
         <div key={`${product.slug}-${product.size}`} className="flex mb-5">
           <Image
@@ -35,6 +35,6 @@ export const Items = ({ products }: Props) => {
           </div>
         </div>
       ))}
-    </>
+    </div>
   )
 }

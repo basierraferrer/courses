@@ -45,7 +45,7 @@ export const PlaceOrder = () => {
 		router.replace(`/orders/${response.order?.id}`);
 	}
 
-	if (!loaded) {
+	if (!loaded || isOrdering) {
 		return <PlaceOrderSkeleton />
 	}
 
