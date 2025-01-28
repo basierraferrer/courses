@@ -2,7 +2,7 @@
 import { useAddressStore, useCartStore } from '@/store';
 import React, { useEffect, useState } from 'react';
 import { PlaceOrderSkeleton } from './PlaceOrderSkeleton';
-import { getSummaryInformation } from '@/utils';
+import { getSummaryInformation, sanitizeAddressORder } from '@/utils';
 import clsx from 'clsx';
 import { placeOrder } from '@/actions';
 import { useRouter } from 'next/navigation';
@@ -31,9 +31,9 @@ export const PlaceOrder = () => {
 			quantity,
 			size
 		}))
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		delete (address as any).userId
-		const response = await placeOrder(productsToOrder, address);
+
+		const addressOrder = sanitizeAddressORder(address);
+		const response = await placeOrder(productsToOrder, addressOrder);
 
 		if (!response.ok) {
 			setIsOrdering(false);

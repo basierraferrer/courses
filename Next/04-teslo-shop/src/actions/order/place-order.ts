@@ -13,7 +13,6 @@ export const placeOrder = async (
   productsToOrder: ProductToOrder[],
   address: Address,
 ) => {
-  console.log('**__** ~ address:', address);
   const session = await auth();
   const userId = session?.user.id;
   // validating user session
@@ -122,6 +121,8 @@ export const placeOrder = async (
         },
       });
 
+      console.log('**__** ~ order:', order);
+
       // 3. Crear la dirección de la orden
       const orderAddress = await tx.orderAddress.create({
         data: {
@@ -131,6 +132,9 @@ export const placeOrder = async (
           orderId: order.id,
         },
       });
+
+      console.log('**__** ~ orderAddress:', orderAddress);
+
       // return data
       return {
         order,

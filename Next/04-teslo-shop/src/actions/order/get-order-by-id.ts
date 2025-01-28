@@ -51,8 +51,6 @@ export const getOrderById = async (orderId: string) => {
       }
     }
 
-    console.log('**__** ~ getOrderById ~ order:', order);
-
     return {
       ok: true,
       data: order,

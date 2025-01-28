@@ -69,6 +69,8 @@ async function main() {
     });
   });
 
+  // Orders
+
   console.log('Seed ejecutado correctamente');
 }
 

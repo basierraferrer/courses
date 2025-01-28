@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getOrderById } from '@/actions';
-import { AddressDelivery, Items, Resume, Status, Title } from '@/components';
+import { AddressDelivery, Items, PayPalButton, Resume, Status, Title } from '@/components';
 
 import { redirect } from 'next/navigation';
 
@@ -70,7 +70,12 @@ export default async function OrdersByIdPage({ params }: Props) {
             <Resume itemsCount={itemsInCart} subtotal={subTotal} tax={tax} total={total} />
 
             <div className="mt-5 mb-2 w-full">
-              <Status status={order?.status as StatusOrder} withBackground />
+              {
+                order?.status === StatusOrder.PENDING ?
+                  <PayPalButton amount={total} orderId={order!.id} />
+                  :
+                  <Status status={order?.status as StatusOrder} withBackground />
+              }
             </div>
           </div>
         </div>

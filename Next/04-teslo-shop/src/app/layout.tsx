@@ -1,8 +1,8 @@
-import type {Metadata} from 'next';
-import {inter} from '@/config/fonts';
+import type { Metadata } from 'next';
+import { inter } from '@/config/fonts';
 
 import './globals.css';
-import {Provider} from '@/components';
+import { Providers } from '@/components';
 
 export const metadata: Metadata = {
   title: {
@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   description: 'Una tienda virtual de productos',
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider>{children}</Provider>
+        <Providers clientId={process.env.NEXT_PAYPAL_PUBLIC_ID ?? ''}>{children}</Providers>
       </body>
     </html>
   );

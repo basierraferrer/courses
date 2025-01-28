@@ -3,3 +3,4 @@ export * from './country.interface';
 export * from './product.interface';
 
 export * from './order.interface';
+export * from './paypal.interface';
