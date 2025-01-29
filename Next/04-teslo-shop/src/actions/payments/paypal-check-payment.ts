@@ -26,8 +26,8 @@ export const getPayPalAuthToken = async (): Promise<string | null> => {
       body: urlencoded,
     }).then(r => r.json());
     return result.access_token;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.log('**__** ~ getPayPalToken ~ error:', error);
     return null;
   }
 };
@@ -49,8 +49,8 @@ const validatePayPalResponse = async (
   try {
     const result = await fetch(ordersUrl, requestOptions).then(r => r.json());
     return result;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.log('**__** ~ getPayPalToken ~ error:', error);
     return null;
   }
 };
@@ -83,7 +83,6 @@ export const paypalCheckPayment = async (transactionId: string) => {
       transactionId,
       authPaypalToken,
     );
-    console.log('**__** ~ paypalCheckPayment ~ response:', response);
 
     if (!response) {
       return {

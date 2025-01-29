@@ -1,7 +1,7 @@
-import { CartProduct } from '@/interfaces'
-import { currencyFormat } from '@/utils'
-import Image from 'next/image'
-import React from 'react'
+import { ProductImage } from '@/components';
+import { CartProduct } from '@/interfaces';
+import { currencyFormat } from '@/utils';
+import React from 'react';
 
 interface Props {
   products?: CartProduct[]
@@ -12,8 +12,8 @@ export const Items = ({ products }: Props) => {
     <div className='mt-5'>
       {products?.map(product => (
         <div key={`${product.slug}-${product.size}`} className="flex mb-5">
-          <Image
-            src={`/products/${product.image}`}
+          <ProductImage
+            src={product.image}
             width={100}
             height={100}
             style={{

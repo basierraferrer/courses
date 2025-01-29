@@ -15,7 +15,7 @@ export const getOrdersByUser = async ({
   if (page < 1) page = 1;
 
   const session = await auth();
-  let where = {};
+  let options = {};
 
   if (!session?.user) {
     return {
@@ -25,7 +25,7 @@ export const getOrdersByUser = async ({
   }
 
   if (session.user.role === 'user') {
-    where = {
+    options = {
       where: {
         userId: session.user.id,
       },
@@ -34,7 +34,10 @@ export const getOrdersByUser = async ({
 
   try {
     const orders = await prisma.order.findMany({
-      ...where,
+      ...options,
+      orderBy: {
+        createdAt: 'desc',
+      },
       take: take,
       skip: (page - 1) * take,
       include: {
@@ -48,7 +51,7 @@ export const getOrdersByUser = async ({
     });
 
     const totalCount = await prisma.order.count({
-      ...where,
+      ...options,
     });
 
     const totalPages = Math.ceil(totalCount / take);
