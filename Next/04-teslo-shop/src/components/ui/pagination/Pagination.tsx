@@ -1,16 +1,16 @@
 'use client';
 
-import {generatePaginationNumbers} from '@/utils';
+import { generatePaginationNumbers } from '@/utils';
 import Link from 'next/link';
 import clsx from 'clsx';
-import {redirect, usePathname, useSearchParams} from 'next/navigation';
-import {IoChevronBackOutline, IoChevronForwardOutline} from 'react-icons/io5';
+import { redirect, usePathname, useSearchParams } from 'next/navigation';
+import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 
 interface Props {
   totalPages: number;
 }
 
-export const Pagination = ({totalPages}: Props) => {
+export const Pagination = ({ totalPages }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -55,7 +55,7 @@ export const Pagination = ({totalPages}: Props) => {
             </Link>
           </li>
 
-          {allPages.map((page, index) => (
+          {allPages.map((page) => (
             <li key={page} className="page-item">
               <Link
                 className={clsx(
