@@ -1,0 +1,34 @@
+{
+  "name": "curso-node-clase-1",
+  "version": "1.0.0",
+  "description": "Clase 1 del curso de node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basierraferrer/courses.git#main"
+  },
+  "keywords": [
+    "curso",
+    "node",
+    "nodejs",
+    "basierraferrer"
+  ],
+  "author": "Brian Alexis Sierra - basierraferrer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/basierraferrer/courses/issues"
+  },
+  "homepage": "https://github.com/basierraferrer/courses/tree/main#readme",
+  "dependencies": {
+    "picocolors": "1.1.1"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  }
+}
