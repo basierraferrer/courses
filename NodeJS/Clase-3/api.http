@@ -1,0 +1,32 @@
+### Obetner las peliculas
+GET http://localhost:1234/movies
+
+### Obenter una pelicula pir id
+GET http://localhost:1234/movies/1
+
+### Obtner una pelicula por genero
+GET http://localhost:1234/movies?genre=action
+
+### Crear una pelicula
+POST http://localhost:1234/movies
+Content-Type: application/json
+
+{
+  "title": "The Godfather",
+  "year": 1975,
+  "director": "Francis Ford Coppola",
+  "duration": 175,
+  "poster": "https://img.fruugo.com/product/4/49/14441494_max.jpg",
+  "genre": [
+    "Crime",
+    "Drama"
+  ]
+}
+
+### Actualizar una pelicula
+PATCH http://localhost:1234/movies/12909fd1-b249-4f26-8cf7-a8a74d9db57f
+Content-Type: application/json
+
+{
+  year: 1972
+}
