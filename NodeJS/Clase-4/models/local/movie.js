@@ -12,11 +12,11 @@ export class MovieModel {
     return movies
   }
 
-  static async getMovieById ({ id }) {
+  static async getById ({ id }) {
     return movies.find(movie => movie.id === id)
   }
 
-  static async createMovie ({ data }) {
+  static async create ({ data }) {
     // en base de datos
     const newMovie = {
       id: randomUUID(), // uuid v4
@@ -30,7 +30,7 @@ export class MovieModel {
     return newMovie
   }
 
-  static async deleteMovie ({ id }) {
+  static async delete ({ id }) {
     const movieIndex = movies.findIndex(movie => movie.id === id)
 
     if (movieIndex === -1) {
@@ -42,7 +42,7 @@ export class MovieModel {
     return true
   }
 
-  static async updatedMovie ({ id, data }) {
+  static async updated ({ id, data }) {
     const movieIndex = movies.findIndex(movie => movie.id === id)
     if (movieIndex === -1) {
       return {
