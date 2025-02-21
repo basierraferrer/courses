@@ -12,3 +12,5 @@ Este proyecto estara divido por _clases_, en cada _clase_ se tendran unos archiv
 
 - Clase 1: [Modules](./Clase_1/README.md)
 - Clase 2: [API basic](./Clase-2/README.md)
+- Clase 3: [API REST with express](./Clase-3/README.md)
+- Clase 4: [API REST with MVC](./Clase-4/README.md)
