@@ -10,7 +10,7 @@
 
 En esta clase se hizo la creación de una API REST usando el framework de `express`. Se uso _ES modules_ para la creación de los archivos. Se uso la libreria `zod` para validar el esquema de la pelicula para su creación y/o actualización.
 
-Se implementó el patrón `MVC` para la estructuura del proyecto.
+Se implementó el patrón `MVC` para la estructura del proyecto y se realizó la creación de un modelo para la conexión a DB en MySQL.
 
 
 ## Ejecutar em dev
